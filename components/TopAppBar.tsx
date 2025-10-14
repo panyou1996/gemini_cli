@@ -2,6 +2,7 @@
 import React from 'react';
 import { useChat } from '../context/ChatContext';
 import { MenuIcon, IncognitoIcon, SettingsCogIcon, NewChatIcon, BookmarkIcon, BroomIcon } from './icons/Icons';
+import HomeIcon from './HomeIcon';
 
 interface TopAppBarProps {
   onMenuClick: () => void;
@@ -21,9 +22,14 @@ const TopAppBar: React.FC<TopAppBarProps> = ({ onMenuClick, onSettingsClick, onT
 
   return (
     <header className="flex-shrink-0 h-14 bg-light-background dark:bg-dark-background px-4 flex items-center justify-between border-b border-light-border dark:border-dark-border">
-      <button onClick={onMenuClick} className="p-2 text-light-icon dark:text-dark-icon">
-        <MenuIcon />
-      </button>
+      <div className="flex items-center">
+        <a href="https://www.focus-du.xyz/" title="Home" className="p-2 text-light-icon dark:text-dark-icon">
+          <HomeIcon />
+        </a>
+        <button onClick={onMenuClick} className="p-2 text-light-icon dark:text-dark-icon">
+          <MenuIcon />
+        </button>
+      </div>
 
       <div className="text-sm text-light-text-secondary dark:text-dark-text-secondary">
         {tokenCount > 0 && `${tokenCount.toLocaleString()} tokens`}
