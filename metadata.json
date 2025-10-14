@@ -1,0 +1,7 @@
+{
+  "name": "Google AI Studio Mobile Clone",
+  "description": "A high-fidelity replica of the Google AI Studio mobile application, designed for conversational AI interaction with support for multimedia inputs, Markdown rendering, and light/dark themes.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
