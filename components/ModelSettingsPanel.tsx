@@ -32,13 +32,13 @@ const ModelSettingsPanel: React.FC<ModelSettingsPanelProps> = ({ isOpen, onClose
               onChange={(e) => updateModelSettings({ model: e.target.value as any })}
               className="mt-1 block w-full bg-light-background dark:bg-dark-background border border-light-border dark:border-dark-border rounded-md shadow-sm p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              {/* FIX: Removed non-recommended model 'gemini-2.5-pro' and reordered options for clarity. */}
+              <option value="gemini-2.5-pro">gemini-2.5-pro</option>
               <option value="gemini-2.5-flash">gemini-2.5-flash</option>
               <option value="gemini-2.5-flash-image">gemini-2.5-flash-image</option>
               <option value="imagen-4.0-generate-001">imagen-4.0-generate-001</option>
             </select>
             <p className="text-xs text-light-text-secondary dark:text-dark-text-secondary mt-1">
-              Choose the model for your task. 'Flash' is for text, 'Flash-Image' edits images, and 'Imagen' creates new ones.
+              Choose the model for your task. 'Pro' and 'Flash' are for text/vision, 'Flash-Image' edits images, and 'Imagen' creates new ones.
             </p>
           </div>
 

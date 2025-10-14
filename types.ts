@@ -15,8 +15,7 @@ export interface Chat {
 }
 
 export interface ModelSettings {
-  // FIX: Removed 'gemini-2.5-pro' as it is not a recommended model.
-  model: 'gemini-2.5-flash' | 'gemini-2.5-flash-image' | 'imagen-4.0-generate-001';
+  model: 'gemini-2.5-pro' | 'gemini-2.5-flash' | 'gemini-2.5-flash-image' | 'imagen-4.0-generate-001';
   systemInstruction: string;
   temperature: number;
   aspectRatio: '1:1' | '3:4' | '4:3' | '9:16' | '16:9';
