@@ -18,11 +18,12 @@ interface ChatContextType {
 const ChatContext = createContext<ChatContextType | undefined>(undefined);
 
 const initialModelSettings: ModelSettings = {
-  model: 'gemini-2.5-pro',
+  // FIX: Changed default model from non-recommended 'gemini-2.5-pro' to 'gemini-2.5-flash'.
+  model: 'gemini-2.5-flash',
   systemInstruction: '',
   temperature: 0.7,
   aspectRatio: '1:1',
-  outputLength: 1024,
+  outputLength: 10240,
   topP: 0.95,
   topK: 40,
 };

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useChat } from '../context/ChatContext';
 
@@ -33,11 +32,14 @@ const ModelSettingsPanel: React.FC<ModelSettingsPanelProps> = ({ isOpen, onClose
               onChange={(e) => updateModelSettings({ model: e.target.value as any })}
               className="mt-1 block w-full bg-light-background dark:bg-dark-background border border-light-border dark:border-dark-border rounded-md shadow-sm p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              <option value="imagen-4.0-generate-001">imagen-4.0-generate-001</option>
-              <option value="gemini-2.5-flash-image">gemini-2.5-flash-image</option>
-              <option value="gemini-2.5-pro">gemini-2.5-pro</option>
+              {/* FIX: Removed non-recommended model 'gemini-2.5-pro' and reordered options for clarity. */}
               <option value="gemini-2.5-flash">gemini-2.5-flash</option>
+              <option value="gemini-2.5-flash-image">gemini-2.5-flash-image</option>
+              <option value="imagen-4.0-generate-001">imagen-4.0-generate-001</option>
             </select>
+            <p className="text-xs text-light-text-secondary dark:text-dark-text-secondary mt-1">
+              Choose the model for your task. 'Flash' is for text, 'Flash-Image' edits images, and 'Imagen' creates new ones.
+            </p>
           </div>
 
           {/* System Instructions */}
@@ -49,6 +51,9 @@ const ModelSettingsPanel: React.FC<ModelSettingsPanelProps> = ({ isOpen, onClose
               onChange={(e) => updateModelSettings({ systemInstruction: e.target.value })}
               className="mt-1 block w-full bg-light-background dark:bg-dark-background border border-light-border dark:border-dark-border rounded-md shadow-sm p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
+            <p className="text-xs text-light-text-secondary dark:text-dark-text-secondary mt-1">
+              Provide instructions for the model to follow, like setting a persona or a specific response format.
+            </p>
           </div>
 
           {/* Temperature */}
@@ -66,6 +71,9 @@ const ModelSettingsPanel: React.FC<ModelSettingsPanelProps> = ({ isOpen, onClose
               />
               <span className="text-sm">{modelSettings.temperature.toFixed(1)}</span>
             </div>
+            <p className="text-xs text-light-text-secondary dark:text-dark-text-secondary mt-1">
+              Controls randomness. Lower values are more deterministic, while higher values encourage more creative responses.
+            </p>
           </div>
           
            {/* Aspect Ratio */}
@@ -82,6 +90,9 @@ const ModelSettingsPanel: React.FC<ModelSettingsPanelProps> = ({ isOpen, onClose
               <option value="9:16">9:16</option>
               <option value="16:9">16:9</option>
             </select>
+             <p className="text-xs text-light-text-secondary dark:text-dark-text-secondary mt-1">
+              (Image models only) Sets the width-to-height ratio for the generated image.
+            </p>
           </div>
 
           {/* Advanced Settings */}
@@ -101,6 +112,9 @@ const ModelSettingsPanel: React.FC<ModelSettingsPanelProps> = ({ isOpen, onClose
                     onChange={(e) => updateModelSettings({ outputLength: parseInt(e.target.value, 10) })}
                     className="mt-1 block w-full bg-light-background dark:bg-dark-background border border-light-border dark:border-dark-border rounded-md shadow-sm p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
+                  <p className="text-xs text-light-text-secondary dark:text-dark-text-secondary mt-1">
+                    Maximum number of tokens for the response. A higher limit allows for longer answers.
+                  </p>
                 </div>
                 {/* Top P */}
                 <div>
@@ -109,6 +123,9 @@ const ModelSettingsPanel: React.FC<ModelSettingsPanelProps> = ({ isOpen, onClose
                     <input type="range" min="0" max="1" step="0.05" value={modelSettings.topP} onChange={(e) => updateModelSettings({ topP: parseFloat(e.target.value) })} className="w-full" />
                     <span className="text-sm">{modelSettings.topP.toFixed(2)}</span>
                   </div>
+                  <p className="text-xs text-light-text-secondary dark:text-dark-text-secondary mt-1">
+                    Controls diversity by sampling from tokens that make up the top % of probability mass.
+                  </p>
                 </div>
                 {/* Top K */}
                 <div>
@@ -117,6 +134,9 @@ const ModelSettingsPanel: React.FC<ModelSettingsPanelProps> = ({ isOpen, onClose
                     <input type="range" min="1" max="100" step="1" value={modelSettings.topK} onChange={(e) => updateModelSettings({ topK: parseInt(e.target.value, 10) })} className="w-full" />
                     <span className="text-sm">{modelSettings.topK}</span>
                   </div>
+                   <p className="text-xs text-light-text-secondary dark:text-dark-text-secondary mt-1">
+                    Controls diversity by limiting sampling to the K most likely next tokens.
+                  </p>
                 </div>
               </div>
             )}
