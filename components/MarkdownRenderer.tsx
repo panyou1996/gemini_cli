@@ -54,7 +54,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
         if (listType === 'ul') {
           elements.push(<ul key={`ul-${elements.length}`} className="list-disc list-inside space-y-1 my-2">{listItems}</ul>);
         } else if (listType === 'ol') {
-          elements.push(<ol key={`ol-${elements.length}`} className="list-decimal list-inside space-y-1 my-2">{listItems}</ul>);
+          elements.push(<ol key={`ol-${elements.length}`} className="list-decimal list-inside space-y-1 my-2">{listItems}</ol>);
         }
         listItems = [];
         listType = null;
