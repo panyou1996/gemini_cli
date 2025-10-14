@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { CopyIcon, CheckIcon } from './icons/Icons';
 
@@ -27,7 +28,7 @@ const CodeBlock: React.FC<{ code: string }> = ({ code }) => {
       >
         {isCopied ? <CheckIcon className="w-4 h-4" /> : <CopyIcon className="w-4 h-4" />}
       </button>
-      <pre className="p-4 overflow-x-auto text-sm text-white">
+      <pre className="p-4 text-sm text-white whitespace-pre-wrap break-words">
         <code>{code}</code>
       </pre>
     </div>
@@ -53,7 +54,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
         if (listType === 'ul') {
           elements.push(<ul key={`ul-${elements.length}`} className="list-disc list-inside space-y-1 my-2">{listItems}</ul>);
         } else if (listType === 'ol') {
-          elements.push(<ol key={`ol-${elements.length}`} className="list-decimal list-inside space-y-1 my-2">{listItems}</ol>);
+          elements.push(<ol key={`ol-${elements.length}`} className="list-decimal list-inside space-y-1 my-2">{listItems}</ul>);
         }
         listItems = [];
         listType = null;

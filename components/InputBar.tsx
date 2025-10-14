@@ -1,5 +1,5 @@
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useChat } from '../context/ChatContext';
 import { AddIcon, SendIcon, CameraIcon, FileIcon, CloseIcon } from './icons/Icons';
 
@@ -9,6 +9,7 @@ const InputBar: React.FC = () => {
   const [showAttachmentMenu, setShowAttachmentMenu] = useState(false);
   const { sendMessage, isLoading } = useChat();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleSend = () => {
     if ((prompt.trim() || image) && !isLoading) {
@@ -30,6 +31,30 @@ const InputBar: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    const textarea = textareaRef.current;
+    if (textarea) {
+      textarea.style.height = 'auto'; // Reset height to recalculate
+      const scrollHeight = textarea.scrollHeight;
+      const maxHeight = 200; // approx 12rem
+      
+      if (scrollHeight > maxHeight) {
+        textarea.style.height = `${maxHeight}px`;
+        textarea.style.overflowY = 'auto';
+      } else {
+        textarea.style.height = `${scrollHeight}px`;
+        textarea.style.overflowY = 'hidden';
+      }
+    }
+  }, [prompt]);
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
+    }
+  };
+
   return (
     <div className="flex-shrink-0 p-2 border-t border-light-border dark:border-dark-border bg-light-background dark:bg-dark-background">
       {image && (
@@ -43,7 +68,7 @@ const InputBar: React.FC = () => {
           </button>
         </div>
       )}
-      <div className="flex items-center bg-light-content dark:bg-dark-content rounded-full p-1">
+      <div className="flex items-end bg-light-content dark:bg-dark-content rounded-2xl p-2">
         <div className="relative">
           <button 
             onClick={() => setShowAttachmentMenu(!showAttachmentMenu)}
@@ -63,13 +88,14 @@ const InputBar: React.FC = () => {
           )}
         </div>
         <input type="file" ref={fileInputRef} onChange={handleFileChange} accept="image/*" className="hidden"/>
-        <input
-          type="text"
+        <textarea
+          ref={textareaRef}
+          rows={1}
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
-          onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+          onKeyDown={handleKeyDown}
           placeholder="Start typing a prompt"
-          className="flex-grow bg-transparent px-4 py-2 text-light-text dark:text-dark-text placeholder-light-text-secondary dark:placeholder-dark-text-secondary focus:outline-none"
+          className="flex-grow bg-transparent px-4 py-2 text-light-text dark:text-dark-text placeholder-light-text-secondary dark:placeholder-dark-text-secondary focus:outline-none resize-none"
           disabled={isLoading}
         />
         <button

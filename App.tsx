@@ -32,7 +32,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="h-screen w-screen max-w-md mx-auto flex flex-col font-sans bg-light-background dark:bg-dark-background relative overflow-hidden">
+    <div className="h-screen w-screen flex flex-col font-sans bg-light-background dark:bg-dark-background relative overflow-hidden">
       <TopAppBar
         onMenuClick={() => setIsHistoryPanelOpen(true)}
         onSettingsClick={() => setIsSettingsPanelOpen(true)}
