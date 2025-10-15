@@ -129,7 +129,7 @@ export const ChatProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         };
         setCurrentChat(prev => [...prev, userMessage, modelMessage]);
 
-        const stream = await generateContentStream(prompt, modelSettings, image);
+        const stream = await generateContentStream(prompt, modelSettings, currentChat, image);
         let fullResponse = '';
         for await (const chunk of stream) {
           const chunkText = chunk.text;

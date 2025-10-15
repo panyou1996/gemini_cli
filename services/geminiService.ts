@@ -23,6 +23,7 @@ interface StreamChunk {
 export async function* generateContentStream(
   prompt: string,
   settings: ModelSettings,
+  history: Message[],
   imageBase64?: string
 ): AsyncGenerator<StreamChunk> {
   const response = await fetch(SUPABASE_GEMINI_PROXY_URL, {
@@ -32,6 +33,7 @@ export async function* generateContentStream(
       action: 'stream',
       prompt,
       settings,
+      history,
       imageBase64,
     }),
   });
